@@ -72,21 +72,3 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/todo-app-cicd:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-  # Job 3: Деплой на VM (опционально, можно пока пропустить)
-  deploy:
-    needs: docker-build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Deploy to VM
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.VM_SSH_KEY }}
-          port: ${{ secrets.VM_SSH_PORT }}
-          script: |
-            echo "Деплой на VM (пока заглушка)"
-            echo "Для реального деплоя нужна виртуальная машина"
